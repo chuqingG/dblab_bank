@@ -1,0 +1,25 @@
+<table class="table table-hover">
+    <tr>
+        <th>身份证号</th>
+        <th>姓名</th>
+        <th>所在支行</th>
+        <th>手机号</th>
+        <th>联系地址</th>
+        <th>入职日期</th>
+        <th>操作</th>
+    </tr>
+    {% for e in employees %}
+    <tr>
+        <td>{{ e.id }}</td>
+        <td>{{ e.name }}</td>
+        <td><a href="{{ url_for('main.branch_edit', branch_name=e.branch.name) }}">{{ e.branch.name }}</a></td>
+        <td>{{ e.phone }}</td>
+        <td>{{ e.address }} </td>
+        <td>{{ e.enroll_date.strftime('%Y-%m-%d') }} </td>
+        <td>
+                <a class="btn btn-success btn-sm" type="buttoon" href="{{ url_for('main.employee_edit', employee_id=e.id) }}">编辑</a>
+                <a class="btn btn-danger btn-sm" type="button" href="{{ url_for('main.employee_delete', id=e.id) }}">删除</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>

@@ -1,0 +1,30 @@
+<table class="table table-hover">
+    <tr>
+        <th>身份证号</th>
+        <th>姓名</th>
+        <th>手机号</th>
+        <th>联系地址</th>
+        <th>联系人姓名</th>
+        <th>联系人手机号</th>
+        <th>联系人邮箱</th>
+        <th>联系人与客户关系</th>
+        <th>操作</th>
+    </tr>
+    {% for c in clients %}
+    <tr>
+        <td>{{ c.id }}</td>
+        <td>{{ c.name }}</td>
+        <td>{{ c.phone }}</td>
+        <td>{{ c.address }} </td>
+        <td>{{ c.contact_name }} </td>
+        <td>{{ c.contact_phone }} </td>
+        <td>{{ c.contact_email }} </td>
+        <td>{{ c.contact_relation }} </td>
+
+        <td>
+                <a class="btn btn-success btn-sm" type="buttoon" href="{{ url_for('main.client_edit', client_id=c.id) }}">编辑</a>
+                <a class="btn btn-danger btn-sm" type="button" href="{{ url_for('main.client_delete', id=c.id) }}">删除</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>

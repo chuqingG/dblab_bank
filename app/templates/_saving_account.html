@@ -1,0 +1,29 @@
+<table class="table table-hover">
+    <tr>
+        <th>账户编号</th>
+        <th>开户支行</th>
+        <th>负责员工</th>
+        <th>余额</th>
+        <th>利率</th>
+        <th>货币种类</th>
+        <th>开户日期</th>
+        <th>最近访问日期</th>
+        <th>操作</th>
+    </tr>
+    {% for a in saving_accounts %}
+    <tr>
+        <td>{{ a.id }}</td>
+        <td><a href="{{ url_for('main.branch_edit', branch_name=a.branch.name) }}">{{ a.branch.name }}</a></td>
+        <td><a href="{{ url_for('main.employee_edit', employee_id=a.employee.id) }}">{{ a.employee.name }}</a></td>
+        <td>{{ a.balance }}</td>
+        <td>{{ a.interest_rate }}</td>
+        <td>{{ a.currency_type }}</td>
+        <td>{{ a.open_date }} </td>
+        <td>{{ a.last_access_date}} </td>
+        <td>
+                <a class="btn btn-success btn-sm" type="button" href="{{ url_for('main.saving_account_edit', account_id=a.id) }}">编辑</a>
+                <a class="btn btn-danger btn-sm" type="button" href="{{ url_for('main.saving_account_delete', account_id=a.id) }}">删除</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>

@@ -1,0 +1,30 @@
+<table class="table table-hover">
+    <tr>
+        <th>贷款编号</th>
+        <th>贷款支行</th>
+        <th>负责员工</th>
+        <th>所属客户</th>
+        <th>金额</th>
+        <th>当前状态</th>
+        <th>操作</th>
+    </tr>
+    {% for a in loans %}
+    <tr>
+        <td>{{ a.id }}</td>
+        <td><a href="{{ url_for('main.branch_edit', branch_name=a.branch.name) }}">{{ a.branch.name }}</a></td>
+        <td><a href="{{ url_for('main.employee_edit', employee_id=a.employee.id) }}">{{ a.employee.name }}</a></td>
+        <td>
+            {% for x in a.clients.all() %}
+                {{ x.client.name}}
+            {% endfor %}
+        </td>
+        <td>{{ a.amount }}</td>
+        <td>{{ a.status }}</td>
+        <td>
+                <a class="btn btn-primary btn-sm" type="button" href="{{ url_for('main.loan_log_edit', loan_log_id='create', loan_id=a.id) }}">发放贷款</a>
+                <a class="btn btn-info btn-sm" type="button" href="{{ url_for('main.loan_log', loan_id=a.id) }}">查看发放记录</a>
+                <a class="btn btn-danger btn-sm" type="button" href="{{ url_for('main.loan_delete', loan_id=a.id) }}">删除</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>

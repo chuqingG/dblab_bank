@@ -1,0 +1,28 @@
+
+{% extends "base.html" %}
+{% import "_macros.html" as macros %}
+
+{% block title %}贷款管理{% endblock %}
+
+{% block page_content %}
+<table class="table table-hover">
+    <tr>
+        <th>贷款发放编号</th>
+        <th>发放金额</th>
+        <th>发放时间</th>
+    </tr>
+    {% for a in loan_logs %}
+    <tr>
+        <td>{{ a.id }}</td>
+        <td>{{ a.amount }}</td>
+        <td>{{ moment(a.date).fromNow() }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% if pagination %}
+<div class="pagination">
+    {{ macros.pagination_widget(pagination, '.loan_log', loan_id=loan_id) }}
+</div>
+{% endif %}
+{% endblock %}
